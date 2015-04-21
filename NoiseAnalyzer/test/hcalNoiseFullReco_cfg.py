@@ -44,7 +44,7 @@ process.source = cms.Source("PoolSource",
 #  '/store/data/Run2012A/HT/RECO/PromptReco-v1/000/191/226/E029DBF8-D487-E111-BA88-003048D2BD66.root',
 #  '/store/data/Run2012A/HT/RECO/PromptReco-v1/000/191/226/DE2DB6A9-F687-E111-A3A4-BCAEC518FF68.root'
 #   '/store/data/Run2012A/MET/RAW/v1/000/191/700/BE450D4C-9A89-E111-A25B-003048F11DE2.root'
-   '/store/data/Run2012A/HcalHPDNoise/RAW/v1/000/191/210/C268F8C7-A185-E111-9B8D-00215AEDFCCC.root'
+   '/store/express/Commissioning2015/StreamExpressCosmics/ALCARECO/SiStripPCLHistos-Express-v1/000/236/890/00000/8C620A18-A0C2-E411-AB2B-02163E01200B.root'
     )
                             
                             )
@@ -86,7 +86,7 @@ process.recoCaloOnly = cms.Sequence(calolocalreco*ecalClusters*caloTowersRec*ak5
 # If using RAW data, do Hcal RECO
 #------------------------------------------------------------
 
-process.GlobalTag.globaltag = 'GR_R_52_V7::All'
+process.GlobalTag.globaltag = 'GR_E_V42::All'
 
 # Path and EndPath definitions
 process.raw2digi_step = cms.Path(process.RawToDigi)
