@@ -24,7 +24,7 @@ process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.cerr.FwkReport.reportEvery = 100
 
 # Process 100 events
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(200))
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(NEVENTS))
 
 # Load RAW data (or RECO)
 #from run_minimumbias_227489 import *

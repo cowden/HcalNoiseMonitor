@@ -12,6 +12,12 @@ if [ "$#" -ne "2" ]; then
   exit 1
 fi
 
+if [ -z "$NOISEANALYZER" ]; then
+  echo "Please setup the HcalNoiseMonitor environment"
+  echo "source scripts/setup.sh"
+  exit 2
+fi
+
 
 RN=$1
 OFILE=$2
@@ -39,7 +45,7 @@ if [ -z "$DS" ]; then
 fi
 
 
-cat scripts/DataTemplate.txt > $OFILE
+cat $NOISEANALYZER/scripts/DataTemplate.txt > $OFILE
 count=0
 fileList=$(dumpFiles)
 for file in $fileList; do
