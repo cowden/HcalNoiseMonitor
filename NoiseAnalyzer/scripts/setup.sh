@@ -6,7 +6,7 @@
 # directory
 
 if [ ! -z "$CMSSW_BASE" ]; then
-  export NOISANALYZER=$CMSSW_BASE/src/HcalNoiseMonitor/NoiseAnalyzer
+  export NOISEANALYZER=$CMSSW_BASE/src/HcalNoiseMonitor/NoiseAnalyzer
 
   export PATH=$PATH:$NOISEANALYZER/bin:$NOISEANALYZER/scripts
   export PYTHONPATH=$PYTHONPATH:$NOISEANALYZER/python

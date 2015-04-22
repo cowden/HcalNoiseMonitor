@@ -36,7 +36,7 @@ process.source = source
 # -sk- histogram output.
 process.TFileService = cms.Service("TFileService",
 #cmj2011Apr24    fileName = cms.string('hitogram_output.root')
-    fileName = cms.string('OUTPUTNAME.root')
+    fileName = cms.string('OUTPUTNAME')
 )
 
 # Output definition

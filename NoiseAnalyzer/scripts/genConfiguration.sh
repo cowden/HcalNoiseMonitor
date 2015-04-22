@@ -25,13 +25,14 @@ OUTPUTROOT=$2
 OUTPUT=$3
 NEVENTS=200
 
-FILELIST=$NOISEANALYZER/python/noiseFiles_${RN}.py
+FILELIST=noiseFiles_${RN}.py
+FLSCRIPT=${FILELIST%%.py}
 
 # generate the file list
-genFileList.sh $RN $FILELIST
+genFileList.sh $RN $NOISEANALYZER/python/$FILELIST
 
 # generate configuration from template
-sed -e "s/INPUTLIST/$FILELIST/;s/OUTPUTNAME/$OUTPUTROOT/;s/NEVENTS/$NEVENTS/" < $NOISEANALYZER/scripts/hcalNoiseFullReco_TEMPLATE.PY > $OUTPUT
+sed -e "s/INPUTLIST/$FLSCRIPT/;s/OUTPUTNAME/$OUTPUTROOT/;s/NEVENTS/$NEVENTS/" < $NOISEANALYZER/scripts/hcalNoiseFullReco_TEMPLATE.py > $OUTPUT
 
 
 
