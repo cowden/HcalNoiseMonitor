@@ -1091,7 +1091,7 @@ HcalNoiseInfoAnalyzer::beginJob()
   hLuminBlockNumberRate_HPDdischg_500_=NoiseDir.make<TH1D>("hLuminBlockNumberRate_HPDdischg_500", "Noise (discharge) LuminBlock number (Rate > 500 GeV)", 3000, 0, 3000);
 
 
-  hRunNumber_=NoiseDir.make<TH1I>("hRunNumber", "Run Numbers used in this file", 30000, 130000, 160000);
+  hRunNumber_=NoiseDir.make<TH1I>("hRunNumber", "Run Numbers used in this file", 330000, 130000, 460000);
   //hRunNumber_->SetBit(TH1::kCanRebin);
   
   hBunchCrossing_=NoiseDir.make<TH1I>("hBunchCrossing", "Bunch Crossings used in this file", 4000, 0, 4000);

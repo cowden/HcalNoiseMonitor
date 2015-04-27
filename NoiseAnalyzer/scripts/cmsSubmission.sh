@@ -5,15 +5,20 @@
 # A script to be executed on batch node.
 # This script sets up the CMSSW environment and then 
 # executes cmsRun with the given configuration file (required argument)
+# Since execution is done a local file system the output directory is also required.
+# This script will copy all root files to that directory.
 
 ANALYSIS_DIR=$PWD
 
-if [ "$#" -ne "1" ]; then
-  echo "Please provide CMSSW configuration script"
+if [ "$#" -ne "2" ]; then
+  echo "Please provide CMSSW configuration script and output directory"
+  echo "cmsSubmission.sh  config.py outputDir/"
   exit 1
 fi
 
 echo "Setting up analysis with configuration -> $1"
+
+OUTPUTDIR=$2
 
 env
 echo ""
@@ -43,3 +48,5 @@ cmsRun $1
 
 echo "Job Complete $?"
 
+echo "Moving output to $OUTPUTDIR"
+mv *.root $OUTPUTDIR/

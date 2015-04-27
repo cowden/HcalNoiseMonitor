@@ -24,7 +24,7 @@ OFILE=$2
 
 
 STREAM=MinimumBias
-COLLECTION=Commissioning2015
+COLLECTION=Commissioning
 FORMAT=RAW
 
 ####
