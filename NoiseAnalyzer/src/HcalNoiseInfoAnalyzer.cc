@@ -853,8 +853,6 @@ void HcalNoiseInfoAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSe
   hNRBXobjectsE20GeV_->Fill(nrbx20gev);
   
 
-  
-
 
   return;
 }
