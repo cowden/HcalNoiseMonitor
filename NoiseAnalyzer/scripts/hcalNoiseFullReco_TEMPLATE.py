@@ -73,7 +73,10 @@ process.hbheprereco.puCorrMethod = cms.int32(0)
 # If using RAW data, do Hcal RECO
 #------------------------------------------------------------
 
-process.GlobalTag.globaltag = 'GR_E_V42::All'
+#------------------------------
+# check the following link for updates to the GlobalTag:
+# https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideFrontierConditions
+process.GlobalTag.globaltag = 'GR_E_V49::All'
 
 # Path and EndPath definitions
 process.raw2digi_step = cms.Path(process.RawToDigi)
