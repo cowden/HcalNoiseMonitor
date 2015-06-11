@@ -20,19 +20,22 @@ if [ -z "$NOISEANALYZER" ]; then
   exit 2
 fi
 
-RN=$1
-OUTPUTROOT=$2
+RN="$1"
+OUTPUTROOT="$2"
 OUTPUT=$3
-NEVENTS=200
+NEVENTS=-1
 
 FILELIST=noiseFiles_${RN}.py
 FLSCRIPT=${FILELIST%%.py}
+
+echo "Parameters:"
+echo "$FLSCRIPT $OUTPUTROOT $NEVENTS"
 
 # generate the file list
 genFileList.sh $RN $NOISEANALYZER/python/$FILELIST
 
 # generate configuration from template
-sed -e "s/INPUTLIST/$FLSCRIPT/;s/OUTPUTNAME/$OUTPUTROOT/;s/NEVENTS/$NEVENTS/" < $NOISEANALYZER/scripts/hcalNoiseFullReco_TEMPLATE.py > $OUTPUT
+sed -e "s/INPUTLIST/$FLSCRIPT/;s,OUTPUTNAME,$OUTPUTROOT,;s/NEVENTS/$NEVENTS/" < $NOISEANALYZER/scripts/hcalNoiseFullReco_TEMPLATE.py > $OUTPUT
 
 
 

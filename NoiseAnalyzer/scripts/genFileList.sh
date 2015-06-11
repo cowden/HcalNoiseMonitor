@@ -24,7 +24,7 @@ OFILE=$2
 
 
 STREAM=MinimumBias
-COLLECTION=Commissioning
+COLLECTION=Run2015A-v1
 FORMAT=RAW
 
 ####
