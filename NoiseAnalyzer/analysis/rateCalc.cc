@@ -33,7 +33,7 @@ static const double g_LStime = 23.25; // seconds/LS
 // 
 // print program usage
 void printUsage() {
-  cout << "rateCalc [-r runNumber] histogramFile.root" << endl;
+  cout << "rateCalc [-r runNumber] [-s preScale]  histogramFile.root" << endl;
   return;
 }
 
@@ -44,14 +44,18 @@ int main ( int argc, char ** argv ) {
 
   char * fileName = NULL;
   unsigned runNumber = 0;
+  double preScale = 10.;
   // parse command line options
 
   int c;
   opterr = 0;
-  while ( (c= getopt(argc,argv,"r:h")) != -1 )
+  while ( (c= getopt(argc,argv,"s:r:h")) != -1 )
     switch (c) {
       case 'r':
 	runNumber = atoi(optarg);
+	break;
+      case 's':	
+	preScale = atof(optarg);
 	break;
       case 'h':
 	printUsage();
@@ -90,7 +94,7 @@ int main ( int argc, char ** argv ) {
   }
 
   // scale factor to convert rate to Hz
-  const double factor = numLS*g_LStime;
+  const double factor = numLS*g_LStime/preScale;
 
   // -------------------------
   // Determine rates of noise
@@ -154,6 +158,7 @@ int main ( int argc, char ** argv ) {
   // or immediate processing
   cout << "Dumping noise rates for run number " << runNumber << endl;
   cout << "Total Number of LS covered: " << numLS << endl;
+  cout << "Prescale:          " << preScale << endl;
   cout << "Conversion factor: " << factor << endl;
   cout << "------------------------------------------" << endl;
   cout << "threhold HPD_ion HPD_discharge RBX_Noise" << endl;

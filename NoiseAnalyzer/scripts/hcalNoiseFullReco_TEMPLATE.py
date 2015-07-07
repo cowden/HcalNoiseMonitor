@@ -112,7 +112,7 @@ process.load('HLTrigger.HLTfilters.hltHighLevel_cfi')
 # process.hltHighLevel.HLTPaths = cms.vstring( "HLT_Mu17_Mu8*" )
 # process.hltHighLevel.HLTPaths = cms.vstring( "HLT_ZeroBias*" )
 # process.hltHighLevel.HLTPaths = cms.vstring( "HLT_CentralJet80*" )
-process.hltHighLevel.HLTPaths = cms.vstring( "HLT_MonoCentralPFJet80_PFMETnoMu95_NHEF0p95*" )
+process.hltHighLevel.HLTPaths = cms.vstring( "HLT_L1SingleJet16_*" )
 
 process.hltHighLevel.andOr = True   # True = OR, False = AND
 process.hltHighLevel.throw = False  # tolerate if triggers not available
@@ -123,6 +123,6 @@ process.p = cms.Path(process.hltHighLevel)
 #    -- produce output event file. 
 # process.schedule = cms.Schedule(process.raw2digi_step,process.reconstruction_step,process.endjob_step,process.RECOoutput_step,process.q)
 #    -- no output event file.
-process.schedule = cms.Schedule(process.raw2digi_step,process.reconstruction_step,process.endjob_step,process.q)
+process.schedule = cms.Schedule(process.raw2digi_step,process.p,process.reconstruction_step,process.endjob_step,process.q)
 
 
