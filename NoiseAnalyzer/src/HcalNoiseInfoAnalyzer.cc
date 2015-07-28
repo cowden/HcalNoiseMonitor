@@ -37,6 +37,9 @@
 #include "HcalNoiseMonitor/NoiseAnalyzer/interface/HcalNoiseInfoAnalyzer.h"
 // cmj2011Jul15 - from Suichi
 
+#include "DataFormats/Common/interface/TriggerResults.h"
+#include "FWCore/Common/interface/TriggerNames.h"
+
 #include "TFile.h"
 #include "TH1.h"
 #include "TH1D.h"
@@ -64,6 +67,12 @@ HcalNoiseInfoAnalyzer::HcalNoiseInfoAnalyzer(const edm::ParameterSet& iConfig)
   skipLumiBlocks_ = iConfig.getParameter<double>("SkipLumiBlocks");
   numLumiBlocks_ = iConfig.getParameter<double>("NumLumiBlocks");
   ////
+  //
+
+  m_hltResults = iConfig.getParameter<edm::InputTag>("TriggerResults");
+  m_trigName = iConfig.getParameter<std::string>("TriggerName");
+  m_isFirstTrig = true;
+  m_trigIndex = 0;
 
   truefirstLumi_ = firstLumiBlock_ = maxLumiBlock_ = -1;
   timeDone = false;
@@ -78,6 +87,31 @@ HcalNoiseInfoAnalyzer::~HcalNoiseInfoAnalyzer() {
   
 // ------------ method called to for each event  ------------
 void HcalNoiseInfoAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup) {
+
+  //----------
+  // Select triggered events
+  Handle<TriggerResults> HLTR;
+  iEvent.getByLabel(m_hltResults,HLTR);
+
+  edm::TriggerNames hltNames(iEvent.triggerNames(*HLTR));
+  const std::vector<std::string> & hltNameVec = hltNames.triggerNames();
+
+  // find index of trigger
+  if ( m_isFirstTrig ) {
+    m_isFirstTrig = false;
+    const unsigned nTrig = HLTR->size();
+    for ( unsigned i=0; i != nTrig; i++ ) {
+      if ( hltNameVec[i].find(m_trigName) != std::string::npos ) {
+	m_trigIndex = i;
+	break;
+      }
+    }
+  }
+
+  // filter events
+  if ( !HLTR->accept(m_trigIndex) ) {
+    return;
+  }
 
   hRunNumber_->Fill(iEvent.id().run());
   

@@ -297,6 +297,11 @@ namespace reco {
     std::string rbxCollName_;      // label for the HcalNoiseRBXCollection
     std::string rootHistFilename_; // name of the histogram file
 
+    std::string m_trigName;
+    bool m_isFirstTrig;
+    unsigned m_trigIndex;
+    edm::InputTag m_hltResults;
+
     double numLumiBlocks_;
     double skipLumiBlocks_;
     /////////////////   

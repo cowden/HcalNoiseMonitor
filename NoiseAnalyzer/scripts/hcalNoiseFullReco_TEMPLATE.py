@@ -100,7 +100,9 @@ process.hcalnoiseinfoanalyzer = cms.EDAnalyzer('HcalNoiseInfoAnalyzer',
   rbxCollName = cms.string('hcalnoise'),
   MetTag     = cms.untracked.InputTag( 'met' ),
   SkipLumiBlocks = cms.double(0),
-  NumLumiBlocks = cms.double(5000)
+  NumLumiBlocks = cms.double(5000),
+  TriggerResults = cms.InputTag("TriggerResults","","HLT"),
+  TriggerName = cms.string("HLT_L1SingleJet16_v")
 #cmj2011Apr24
 )
 process.q       = cms.Path(process.hcalnoiseinfoanalyzer)
