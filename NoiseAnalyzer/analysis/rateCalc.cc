@@ -28,6 +28,7 @@ using namespace std;
 //
 // global variables
 static const double g_LStime = 23.25; // seconds/LS
+static const int nRBX = 80;  // number of RBX in HBHE
 
 
 // 
@@ -161,17 +162,63 @@ int main ( int argc, char ** argv ) {
   cout << "Prescale:          " << preScale << endl;
   cout << "Conversion factor: " << factor << endl;
   cout << "------------------------------------------" << endl;
-  cout << "threhold HPD_ion HPD_discharge RBX_Noise" << endl;
+  cout << "BGLB" << endl;
+  cout << "threshold HPD_ion HPD_discharge RBX_Noise" << endl;
   printf("20  %13f%13f%13f\n",HPDionfeedback_20/factor,HPDdischarge_20/factor,RBXNoise_20/factor);
   printf("50  %13f%13f%13f\n",HPDionfeedback_50/factor,HPDdischarge_50/factor,RBXNoise_50/factor);
   printf("100 %13f%13f%13f\n",HPDionfeedback_100/factor,HPDdischarge_100/factor,RBXNoise_100/factor);
   printf("500 %13f%13f%13f\n",HPDionfeedback_500/factor,HPDdischarge_500/factor,RBXNoise_500/factor);
+  cout << "EGLB" << endl;
 
 
   cout << endl;
 
+ 
+
+  //-----------------------------------------
+  // RBX noise by RBX box number
+  sprintf(name,"%s/hRBXNumberRate_RBXnoise_20",baseName);
+  TH1D *h_RBXNumber_20 = (TH1D*)theFile.Get(name);
+
+  sprintf(name,"%s/hRBXNumberRate_RBXnoise_50",baseName);
+  TH1D *h_RBXNumber_50 = (TH1D*)theFile.Get(name);
+
+  sprintf(name,"%s/hRBXNumberRate_RBXnoise_100",baseName);
+  TH1D *h_RBXNumber_100 = (TH1D*)theFile.Get(name);
+
+  sprintf(name,"%s/hRBXNumberRate_RBXnoise_500",baseName);
+  TH1D *h_RBXNumber_500 = (TH1D*)theFile.Get(name);
+
+  cout << "\nRBX Noise by RBX Number" << endl;
+  cout << "Threshold: 20 GeV" << endl;
+  cout << "BTH20" << endl;
+  for ( int bin=1; bin <= nRBX; bin++ ) {
+    cout << runNumber << " " << bin << " " << h_RBXNumber_20->GetBinContent(bin)/factor << endl;
+  } 
+  cout << "ETH20" << endl;
+
+  cout << "Threshold: 50 GeV" << endl;
+  cout << "BTH50" << endl;
+  for ( int bin=1; bin <= nRBX; bin++ ) {
+    cout << runNumber << " " << bin << " " << h_RBXNumber_50->GetBinContent(bin)/factor << endl;
+  } 
+  cout << "ETH50" << endl;
   
-  
+  cout << "Threshold: 100 GeV" << endl;
+  cout << "BTH100" << endl;
+  for ( int bin=1; bin <= nRBX; bin++ ) {
+    cout << runNumber << " " << bin << " " << h_RBXNumber_100->GetBinContent(bin)/factor << endl;
+  } 
+  cout << "ETH100" << endl;
+
+
+  cout << "Threshold: 500 GeV" << endl;
+  cout << "BTH500" << endl;
+  for ( int bin=1; bin <= nRBX; bin++ ) {
+    cout << runNumber << " " << bin << " " << h_RBXNumber_500->GetBinContent(bin)/factor << endl;
+  } 
+  cout << "ETH500" << endl;
+
 
   return 0;
 }

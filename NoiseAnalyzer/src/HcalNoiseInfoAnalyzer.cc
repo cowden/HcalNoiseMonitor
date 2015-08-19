@@ -910,7 +910,7 @@ HcalNoiseInfoAnalyzer::beginJob()
 //cmj2011Jul7	Float_t HighBin = 500.0;
 //	New Bins
 	Int_t noiseBins = 475;
-	Float_t LowBin = 50.0;
+	Float_t LowBin = 20.0;
 	Float_t HighBin = 1000.0;
 //cmj2011Jun30
   
