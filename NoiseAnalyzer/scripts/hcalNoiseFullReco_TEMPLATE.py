@@ -30,7 +30,7 @@ process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(NEVENTS))
 #from run_minimumbias_227489 import *
 from INPUTLIST import *
 process.source = source
-
+process.source.skipEvents = cms.untracked.uint32(SKIP)
 
 
 # -sk- histogram output.
