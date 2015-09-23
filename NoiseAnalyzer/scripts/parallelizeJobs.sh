@@ -48,7 +48,7 @@ for RN in `cat $RUNLIST`; do
   INLIST="noiseFiles_$RN"
   for num in `seq 0 9`; do 
     TOSKIP=$(echo "$NSKIP*$num" | bc)
-    sed -e "s/SKIP/$TOSKIP/;s/NEVENTS/$NSKIP/;s/INPUTLIST/$INLIST/;s/OUTPUTNAME/Hcal_noise_${RN}_${num}.root/" < hcalNoiseFullReco_TEMPLATE.py > scripts/hcalNoiseAnalysis_${RN}_${num}.py;
+    sed -e "s/SKIP/$TOSKIP/;s/NEVENTS/$NSKIP/;s/INPUTLIST/$INLIST/;s/OUTPUTNAME/Hcal_noise_${RN}_${num}.root/" < ${CMSSW_BASE}/src/HcalNoiseMonitor/NoiseAnalyzer/scripts/hcalNoiseFullReco_TEMPLATE.py > scripts/hcalNoiseAnalysis_${RN}_${num}.py;
     bsub -q 2nd \
      	-o logs/hnm2_${RN}_${num}.stdout \
 	-e logs/hnm2_${RN}_${num}.stderr \

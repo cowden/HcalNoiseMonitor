@@ -35,7 +35,7 @@ echo "$FLSCRIPT $OUTPUTROOT $NEVENTS"
 genFileList.sh $RN $NOISEANALYZER/python/$FILELIST
 
 # generate configuration from template
-sed -e "s/INPUTLIST/$FLSCRIPT/;s,OUTPUTNAME,$OUTPUTROOT,;s/NEVENTS/$NEVENTS/" < $NOISEANALYZER/scripts/hcalNoiseFullReco_TEMPLATE.py > $OUTPUT
+sed -e "s/SKIP/0/;s/INPUTLIST/$FLSCRIPT/;s,OUTPUTNAME,$OUTPUTROOT,;s/NEVENTS/$NEVENTS/" < $NOISEANALYZER/scripts/hcalNoiseFullReco_TEMPLATE.py > $OUTPUT
 
 
 
