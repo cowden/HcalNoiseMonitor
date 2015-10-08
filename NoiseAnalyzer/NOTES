@@ -2,4 +2,57 @@
 HCalNoiseMonitor
 ========================================
 
+Quick Start
+----------------------------------------
+After setting up a CMSSW release, navigate to this directory
+and source the setup script in the scripts directory.
+$source scripts/setup.sh
+
+Then make a list of runs to be analyzed and put them in a text file
+one run per line.  Navigate to some separate working area and create
+the following directories:
++ data
++ logs
++ scripts
+
+Generate configuration scripts and submit jobs to the batch system:
+parallelizeJobs.sh runs.txt
+
+Once the jobs have completed, combine output files.
+for run in `cat runs.txt`; do hadd data/Hcal_noise_${run}.root data/Hcal_noise_${run}_*.root; done
+
+Now, calculate noise rates:
+for run in `cat runs.txt`; do rateCalc -r $run -s 1 data/Hcal_noise_${run}.root > rateLog_${run}.txt; done
+
+The noise points can finally be added to the accumulated plots by running
+the addTo* scripts found in the analysis directory.
+for run in `cat runs.txt`; do addToHPDIonFeedback.sh $run rateLog_${run}.txt Run2HPDIonFeedback.gnu; addToHPDDischage.sh $run rateLog_${run}.txt run2HPDDischarge.gnu; addToRBX.sh $run rateLog_${run}.txt Run2RBXNoise.gnu; done
+
+
+
+Directories
+-----------------------------------------
++ analysis
+Source code and scripts for the post processing analysis.
+The scripts which accumulate noise rates for plotting are 
+kept in this directory.
+
++ bin
+When the source code is compiled from the anlaysis directory,
+the executables are placed here.
+
++ scripts
+The scripts used to setup configuration files in the analysis
+are kept here.
+
++ python
+This directory is kept empty in the repository.  During the setup
+of the analysis, input file lists are kept in this directory.
+
++ interface
+Header files for the EDAnalyzer are stored in this directory.
+
++ src
+The EDAnalyzer source code for the main analysis is kept in this directory.
+
 
